@@ -537,8 +537,8 @@ app.post("/suggestedValue",function(req,res){
 		connectAndSetUpMe();
 	}
 	SensorTag.discover(onDiscover);
-})
-);
+});
+//);
 
 console.log("We have started our server on port  "+ port)
 //io.on('connection', function () {
