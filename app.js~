@@ -11,6 +11,8 @@ server.listen(process.env.PORT || 3000);
 var express = require('express');
 var app = module.exports.app = express();
 var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+var port = process.env.PORT || 3000;
 var SensorTag = require('sensortag');
 var path = require('path');
 var fs = require('fs');
@@ -66,7 +68,7 @@ if ('development' == app.get('env')) {
 	app.use(express.errorHandler());
 }
 
-
+server.listen(process.env.PORT || 3000);
 
 app.get("/",function(req,res){
 	res.render('index');
@@ -446,9 +448,6 @@ app.post("/suggestedValue",function(req,res){
 	}
 });
 
-//var io = require('socket.io').listen(server);
-
-//server.listen(process.env.PORT || 3000);
 var io = require('socket.io').listen(app.listen(port,function(){
 	console.log("We have started our server on port 3000  "+ port)
 	// SensorTag.discover(function(tag) { and close it with }); above ondiscover mthod
@@ -540,7 +539,6 @@ var io = require('socket.io').listen(app.listen(port,function(){
 	SensorTag.discover(onDiscover);
 })
 );
-var port = process.env.PORT || 3000;
 //io.on('connection', function () {
 //  io.set("transports", ["xhr-polling"]);
 //  io.set("polling duration", 10);
