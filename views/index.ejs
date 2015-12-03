@@ -32,8 +32,8 @@
 
     
     <script>  
-            var socket = io.connect("\/\/"+window.location.hostname+":"+80);
-            console.log("window.location.hostname"+window.location.hostname);
+            var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
+            console.log("window.location.hostname"+window.location.hostname+"location.port"+location.port);
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
                 console.log("This is my places");
@@ -442,7 +442,7 @@
 </script>
 
 <script>
- var socket = io.connect("\/\/"+window.location.hostname+":"+80);
+ var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
     var objTemp="";
     var ambTemp="";
     var humid="";
@@ -645,3 +645,4 @@ setInterval(function(){
     </div>
 </body>
 </html>
+
