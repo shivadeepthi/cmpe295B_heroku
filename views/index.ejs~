@@ -38,10 +38,10 @@ var socket="";
             console.log("window.location.hostname"+window.location.hostname);
 	    console.log("location.port  "+location.port);
 }else {
-	socket = io.connect("\/\/"+window.location.hostname+":"+80);
+	socket = io.connect("\'"+"\/\/"+window.location.hostname+"\'");
  
 }
-console.log("window.location.hostname"+window.location.hostname);
+console.log("window.location.hostname"+window.location.hostname+ "  "+socket);
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
                 console.log("This is my places");
