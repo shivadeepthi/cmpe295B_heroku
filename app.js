@@ -514,10 +514,10 @@ var io = require('socket.io').listen(server.listen(port,function(){
 	SensorTag.discover(onDiscover);
 })
 );
-//io.on('connection', function () {
-//	  io.set("transports", ["xhr-polling"]);
-//	  io.set("polling duration", 100);
-//	});
+io.on('connection', function () {
+	  io.set("transports", ["xhr-polling"]);
+	  io.set("polling duration", 100);
+	});
 
 
 
