@@ -11,6 +11,7 @@ server.listen(process.env.PORT || 3000);
 var express = require('express');
 var app = module.exports.app = express();
 var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 var SensorTag = require('sensortag');
 var path = require('path');
 var fs = require('fs');
@@ -27,7 +28,7 @@ var flash = require('connect-flash');
 
 var mongoose = require('mongoose/');
 mongoose.connect('mongodb://username:password@ds045704.mongolab.com:45704/cmpe295b_siemt');
-
+server.listen(process.env.PORT || 3000);
 
 var smtpTransport = nodemailer.createTransport("SMTP",{
 	service: "Gmail",
@@ -446,11 +447,9 @@ app.post("/suggestedValue",function(req,res){
 	}
 });
 
-//var io = require('socket.io').listen(server);
-
-//server.listen(process.env.PORT || 3000);
-var io = require('socket.io').listen(app.listen(port,function(){
-	console.log("We have started our server on port 3000  "+ port)
+//var io = require('socket.io').listen(app.listen(port,function(){
+    io.on('connection', function (socket) {
+	//console.log("We have started our server on port  "+ port)
 	// SensorTag.discover(function(tag) { and close it with }); above ondiscover mthod
 	function onDiscover(tag){
 
@@ -495,7 +494,7 @@ var io = require('socket.io').listen(app.listen(port,function(){
 
 				console.log('\tObject Temp = %d deg. C', objectTemp.toFixed(1));
 				function TempChange() {
-					io.sockets.emit('objTemp', { sensorId:tag.id, objTemp: objectTemp, ambTemp: ambientTemp});
+					socket.emit('objTemp', { sensorId:tag.id, objTemp: objectTemp, ambTemp: ambientTemp});
 				};
 				TempChange();	 
 
@@ -506,7 +505,7 @@ var io = require('socket.io').listen(app.listen(port,function(){
 			tag.on('humidityChange', function(temperature, humidity){
 
 				function HumdChange() {
-					io.sockets.emit('humTemp', { sensorId:tag.id,humTemp: temperature,humidity: humidity });
+					socket.emit('humTemp', { sensorId:tag.id,humTemp: temperature,humidity: humidity });
 
 				};
 				HumdChange();
@@ -518,7 +517,7 @@ var io = require('socket.io').listen(app.listen(port,function(){
 			tag.on('barometricPressureChange', function(pressure){
 				console.log('\tpressure = %d', pressure.toFixed(1));
 				function PressChange() {
-					io.sockets.emit('Pressure', {sensorId:tag.id, press: pressure }); 	
+					socket.emit('Pressure', {sensorId:tag.id, press: pressure }); 	
 				};
 				PressChange();
 
@@ -528,7 +527,7 @@ var io = require('socket.io').listen(app.listen(port,function(){
 			tag.on('accelerometerChange', function(x,y,z){
 
 				function AccChange() {
-					io.sockets.emit('Accelero', { sensorId:tag.id,acc: x, ler: y, met:z });
+					socket.emit('Accelero', { sensorId:tag.id,acc: x, ler: y, met:z });
 
 				};
 				AccChange();
@@ -540,7 +539,8 @@ var io = require('socket.io').listen(app.listen(port,function(){
 	SensorTag.discover(onDiscover);
 })
 );
-var port = process.env.PORT || 3000;
+
+console.log("We have started our server on port  "+ port)
 //io.on('connection', function () {
 //  io.set("transports", ["xhr-polling"]);
 //  io.set("polling duration", 10);
