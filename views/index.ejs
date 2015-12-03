@@ -21,34 +21,26 @@
         <link id="base-style" href="/css/modalstyle.css" rel="stylesheet">
 
     <link id="base-style-responsive" href="/css/style-responsive.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
-    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
     <!-- end: CSS -->
      <script src="/js/jquery-1.9.1.min.js"></script>
      <script src="/js/jquery-migrate-1.0.0.min.js"></script>
     <script src='/socket.io/socket.io.js'></script>
-    <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/0.0.9/eon.css" />
+    <script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/v/eon/0.0.9/eon.css" />
 
     
-    <script> 
-var socket; 
-	if(window.location.hostname=="localhost"){
-            socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
+    <script>  
+            var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
             console.log("window.location.hostname"+window.location.hostname);
-	    console.log("location.port  "+location.port);
-}else {
-	socket = io.connect("\/\/"+window.location.hostname);
- 
-}
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
-		$('#p1').html(parseInt(data.objTemp));
                 console.log("This is my places");
                 $('#ambTemp').html(parseInt(data.ambTemp));
                 $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/temp?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
                 data: JSON.stringify( { "SensorId" : data.sensorId,
-                						"ObjectTemp":data.objTemp,
+                                        "ObjectTemp":data.objTemp,
                                         "AmbientTemp":data.ambTemp,
                                         "timeStamp":new Date() } ),
                 type: "POST",
@@ -60,18 +52,18 @@ var socket;
                 $('#humidity').html(parseInt(data.humidity));
                 $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/humidity?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
                 data: JSON.stringify( { "SensorId" : data.sensorId,
-                						"Temperature":data.humTemp,
+                                        "Temperature":data.humTemp,
                                         "Humidity":data.humidity,
                                         "timeStamp":new Date()} ),
                 type: "POST",
                 contentType: "application/json" } );
             }); 
-				socket.on('Accelero', function(data) {
+                socket.on('Accelero', function(data) {
                 $('#accerlero').html(parseInt(data.acc));
                 console.log(data.acc);
                 $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/Accelero?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
                 data: JSON.stringify( { "SensorId" : data.sensorId,
-                						"Accelero":data.acc,
+                                        "Accelero":data.acc,
                                         "timeStamp":new Date()} ),
                 type: "POST",
                 contentType: "application/json" } );
@@ -80,7 +72,7 @@ var socket;
                 $('#pressure').html(parseInt(data.press));
                 $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/pressure?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
                 data: JSON.stringify( {  "SensorId" : data.sensorId,
-                						 "Pressure":data.press,
+                                         "Pressure":data.press,
                                         "timeStamp":new Date() } ),
                 type: "POST",
                 contentType: "application/json" } );
@@ -318,7 +310,7 @@ var socket;
 
 <body>
 
-	<p style="color:black" id="p1"></p>
+
 
 
         <!-- start: Header -->
@@ -353,13 +345,13 @@ var socket;
                         <li><a href="/"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>   
                         <!-- <li><a href="/chart"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li> -->
                         <li>
-							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Historic Analysis</span></a>
-							<ul>
-								<li><a class="submenu" href=/temperature><i class="icon-file-alt"></i><span class="hidden-tablet"> Temperature</span></a></li>
-								<li><a class="submenu" href=/humidity><i class="icon-file-alt"></i><span class="hidden-tablet"> Humidity</span></a></li>
-								<li><a class="submenu" href=/pressure><i class="icon-file-alt"></i><span class="hidden-tablet"> Pressure</span></a></li>
-							</ul>	
-						</li>
+                            <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Historic Analysis</span></a>
+                            <ul>
+                                <li><a class="submenu" href=/temperature><i class="icon-file-alt"></i><span class="hidden-tablet"> Temperature</span></a></li>
+                                <li><a class="submenu" href=/humidity><i class="icon-file-alt"></i><span class="hidden-tablet"> Humidity</span></a></li>
+                                <li><a class="submenu" href=/pressure><i class="icon-file-alt"></i><span class="hidden-tablet"> Pressure</span></a></li>
+                            </ul>   
+                        </li>
                         <li><a href="/reports"><i class="icon-align-justify"></i><span class="hidden-tablet"> Reports</span></a></li>
                         <li><a href="#openModal"><i class="icon-align-justify"></i><span class="hidden-tablet"> Rules</span></a></li>
                     </ul>
@@ -450,12 +442,7 @@ var socket;
 </script>
 
 <script>
- var socket;
-if(window.location.hostname=="localhost"){
-socket= io.connect("\/\/"+window.location.hostname+":"+location.port);
-}else {
-socket = io.connect("\/\/"+window.location.hostname);
-}
+ var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
     var objTemp="";
     var ambTemp="";
     var humid="";
@@ -571,19 +558,19 @@ setInterval(function(){
         <p>
               
         </p>
-	<div id="google_translate_element"></div>
-	<script type="text/javascript">
-	function googleTranslateElementInit() {
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
 }
-	</script>
-	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </footer>
     
     <!-- start: JavaScript-->
 
        
-    	
+        
         <script src="/js/jquery-ui-1.10.0.custom.min.js"></script>
     
         <script src="/js/jquery.ui.touch-punch.js"></script>
