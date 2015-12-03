@@ -454,7 +454,7 @@ console.log("window.location.hostname"+window.location.hostname);
 if(window.location.hostname=="localhost"){
 socket= io.connect("\/\/"+window.location.hostname+":"+location.port);
 }else {
-socket= io.connect("\/\/"+window.location.hostname+":"+80);
+socket = io.connect("\'"+"\/\/"+window.location.hostname+"\'");
 }
     var objTemp="";
     var ambTemp="";
