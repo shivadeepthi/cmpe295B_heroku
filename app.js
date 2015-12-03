@@ -540,7 +540,6 @@ app.post("/suggestedValue",function(req,res){
 });
 //);
 
-console.log("We have started our server on port  "+ port)
 //io.on('connection', function () {
 //  io.set("transports", ["xhr-polling"]);
 //  io.set("polling duration", 10);
