@@ -32,7 +32,7 @@
 
     
     <script> 
-var socket=""; 
+var socket; 
 	if(window.location.hostname=="localhost"){
             socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
             console.log("window.location.hostname"+window.location.hostname);
@@ -41,9 +41,9 @@ var socket="";
 	socket = io.connect("\/\/"+window.location.hostname);
  
 }
-console.log("window.location.hostname"+window.location.hostname);
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
+		$('#p1').html(parseInt(data.objTemp));
                 console.log("This is my places");
                 $('#ambTemp').html(parseInt(data.ambTemp));
                 $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/temp?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
@@ -318,7 +318,7 @@ console.log("window.location.hostname"+window.location.hostname);
 
 <body>
 
-
+	<p style="color:black" id="p1"></p>
 
 
         <!-- start: Header -->
@@ -370,7 +370,7 @@ console.log("window.location.hostname"+window.location.hostname);
             <noscript>
                 <div class="alert alert-block span10">
                     <h4 class="alert-heading">Warning!</h4>
-                    <p>You need to have <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+                    <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
                 </div>
             </noscript>
             
@@ -450,7 +450,7 @@ console.log("window.location.hostname"+window.location.hostname);
 </script>
 
 <script>
- var socket ="";
+ var socket;
 if(window.location.hostname=="localhost"){
 socket= io.connect("\/\/"+window.location.hostname+":"+location.port);
 }else {
