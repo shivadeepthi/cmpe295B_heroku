@@ -31,9 +31,16 @@
     <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/0.0.9/eon.css" />
 
     
-    <script>  
-            var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
+    <script> 
+var socket=""; 
+	if(window.location.hostname=="localhost"){
+            socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
             console.log("window.location.hostname"+window.location.hostname);
+	    console.log("location.port  "+location.port);
+}else {
+	socket = io.connect("\/\/"+window.location.hostname);
+ console.log("window.location.hostname"+window.location.hostname);
+}
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
                 console.log("This is my places");
@@ -362,7 +369,7 @@
             <noscript>
                 <div class="alert alert-block span10">
                     <h4 class="alert-heading">Warning!</h4>
-                    <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+                    <p>You need to have <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
                 </div>
             </noscript>
             
