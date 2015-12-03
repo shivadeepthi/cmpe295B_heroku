@@ -38,7 +38,7 @@ var socket="";
             console.log("window.location.hostname"+window.location.hostname);
 	    console.log("location.port  "+location.port);
 }else {
-	socket = io.connect("\'"+"\/\/"+window.location.hostname+"\'");
+	socket = io.connect("\/\/"+window.location.hostname);
  
 }
 console.log("window.location.hostname"+window.location.hostname);
@@ -454,7 +454,7 @@ console.log("window.location.hostname"+window.location.hostname);
 if(window.location.hostname=="localhost"){
 socket= io.connect("\/\/"+window.location.hostname+":"+location.port);
 }else {
-socket = io.connect("\'"+"\/\/"+window.location.hostname+"\'");
+socket = io.connect("\/\/"+window.location.hostname);
 }
     var objTemp="";
     var ambTemp="";
