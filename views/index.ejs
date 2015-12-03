@@ -32,7 +32,7 @@
 
     
     <script>  
-            var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
+        var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
            //var socket = io.connect(window.location.hostname);
             console.log("window.location.hostname"+location.port);
             socket.on('objTemp', function(data) {
@@ -310,9 +310,6 @@
 </head>
 
 <body>
-
-
-
 
         <!-- start: Header -->
     <div class="navbar">
