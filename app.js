@@ -9,6 +9,7 @@ server.listen(process.env.PORT || 3000);
  */
 
 var express = require('express');
+var enforce = require('express-sslify');
 var app = module.exports.app = express();
 var server = require('http').Server(app);
 //var io = require('socket.io')(server);
@@ -44,6 +45,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(bodyParser());
 app.use(cookieParser());
+app.use(enforce.HTTPS());
 app.use(session({
   cookieName: 'session',
   secret: 'random_string_goes_here',
