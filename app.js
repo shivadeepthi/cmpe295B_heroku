@@ -10,8 +10,8 @@ server.listen(process.env.PORT || 3000);
 
 var express = require('express');
 var app = module.exports.app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 var SensorTag = require('sensortag');
 var path = require('path');
 var fs = require('fs');
@@ -449,7 +449,7 @@ app.post("/suggestedValue",function(req,res){
 
 //var io = require('socket.io').listen(app.listen(port,function(){
     io.on('connection', function (socket) {
-	//console.log("We have started our server on port  "+ port)
+	console.log("We have started our server on port  "+ port);
 	// SensorTag.discover(function(tag) { and close it with }); above ondiscover mthod
 	function onDiscover(tag){
 
@@ -540,7 +540,4 @@ app.post("/suggestedValue",function(req,res){
 });
 //);
 
-//io.on('connection', function () {
-//  io.set("transports", ["xhr-polling"]);
-//  io.set("polling duration", 10);
-//});
+
