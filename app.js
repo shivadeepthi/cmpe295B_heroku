@@ -512,7 +512,7 @@ var io = require('socket.io').listen(server.listen(process.env.PORT || 3000,func
 		connectAndSetUpMe();
 	}
 	SensorTag.discover(onDiscover);
-});
+})
 );
 
 
