@@ -9,6 +9,7 @@ server.listen(process.env.PORT || 3000);
  */
 
 var express = require('express');
+var port = process.env.PORT || 3000;
 var app = module.exports.app = express();
 var server = require('http').Server(app);
 //var io = require('socket.io')(server);
@@ -421,7 +422,7 @@ app.post("/suggestedValue",function(req,res){
 		});
 	}
 });
-var port = process.env.PORT || 3000;
+
 var io = require('socket.io').listen(server.listen(port,function(){
    
 	console.log("We have started our server on port " + server.address().port);
@@ -516,7 +517,7 @@ var io = require('socket.io').listen(server.listen(port,function(){
 );
 io.on('connection', function () {
 	  io.set("transports", ["xhr-polling"]);
-	  io.set("polling duration", 100);
+	  io.set("polling duration", 10);
 	});
 
 
