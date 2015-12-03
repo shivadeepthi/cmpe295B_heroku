@@ -11,7 +11,7 @@ server.listen(process.env.PORT || 3000);
 var express = require('express');
 var app = module.exports.app = express();
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+//var io = require('socket.io')(server);
 var SensorTag = require('sensortag');
 var path = require('path');
 var fs = require('fs');
@@ -20,7 +20,6 @@ var bodyParser=require('body-parser');
 var cookieParser=require('cookie-parser');
 var multer=require('multer');
 var nodemailer = require("nodemailer");
-//var io=require('socket.io');
 var session = require('express-session')
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -77,30 +76,6 @@ app.get("/ruleEngine",function(req,res){
 	var temp=10;
 	res.render('RuleEngine',{"r":0});
 });
-
-// app.post("/authenticate",function(req,res)
-// {		var username= req.body.username;
-// 		var password = req.body.password;
-// 	mongo.checkUser(function(err,results){
-
-// 			if(err)
-// 				throw err;
-// 			else return;
-
-				
-
-
-
-
-// 	},username,password);
-// 	console.log(username);
-// 	res.render('RuleEngine',{});
-	
-	
-	 	
-
-
-// });
 
 app.post('/authenticate',
   passport.authenticate('local', {
@@ -447,8 +422,8 @@ app.post("/suggestedValue",function(req,res){
 	}
 });
 
-//var io = require('socket.io').listen(app.listen(port,function(){
-    io.on('connection', function (socket) {
+var io = require('socket.io').listen(server.listen(process.env.PORT || 3000,function(){
+   
 	console.log("We have started our server on port  "+ port);
 	// SensorTag.discover(function(tag) { and close it with }); above ondiscover mthod
 	function onDiscover(tag){
@@ -494,7 +469,7 @@ app.post("/suggestedValue",function(req,res){
 
 				console.log('\tObject Temp = %d deg. C', objectTemp.toFixed(1));
 				function TempChange() {
-					socket.emit('objTemp', { sensorId:tag.id, objTemp: objectTemp, ambTemp: ambientTemp});
+					io.sockets.emit('objTemp', { sensorId:tag.id, objTemp: objectTemp, ambTemp: ambientTemp});
 				};
 				TempChange();	 
 
@@ -505,7 +480,7 @@ app.post("/suggestedValue",function(req,res){
 			tag.on('humidityChange', function(temperature, humidity){
 
 				function HumdChange() {
-					socket.emit('humTemp', { sensorId:tag.id,humTemp: temperature,humidity: humidity });
+					io.sockets.emit('humTemp', { sensorId:tag.id,humTemp: temperature,humidity: humidity });
 
 				};
 				HumdChange();
@@ -517,7 +492,7 @@ app.post("/suggestedValue",function(req,res){
 			tag.on('barometricPressureChange', function(pressure){
 				console.log('\tpressure = %d', pressure.toFixed(1));
 				function PressChange() {
-					socket.emit('Pressure', {sensorId:tag.id, press: pressure }); 	
+					io.sockets.emit('Pressure', {sensorId:tag.id, press: pressure }); 	
 				};
 				PressChange();
 
@@ -527,7 +502,7 @@ app.post("/suggestedValue",function(req,res){
 			tag.on('accelerometerChange', function(x,y,z){
 
 				function AccChange() {
-					socket.emit('Accelero', { sensorId:tag.id,acc: x, ler: y, met:z });
+					io.sockets.emit('Accelero', { sensorId:tag.id,acc: x, ler: y, met:z });
 
 				};
 				AccChange();
@@ -538,6 +513,6 @@ app.post("/suggestedValue",function(req,res){
 	}
 	SensorTag.discover(onDiscover);
 });
-//);
+);
 
 
