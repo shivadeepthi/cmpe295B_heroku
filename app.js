@@ -7,12 +7,11 @@ var express = require('express'),
 
 server.listen(process.env.PORT || 3000);
  */
-
+var http = require('http');
 var express = require('express');
-var port = process.env.PORT || 3000;
 var app = module.exports.app = express();
-var server = require('http').Server(app);
-//var io = require('socket.io')(server);
+var port = process.env.PORT || 3000;
+//var server = require('http').Server(app);
 var SensorTag = require('sensortag');
 var path = require('path');
 var fs = require('fs');
@@ -423,9 +422,9 @@ app.post("/suggestedValue",function(req,res){
 	}
 });
 
-var io = require('socket.io').listen(server.listen(port,function(){
+var io = require('socket.io').listen(app.listen(port,function(){
    
-	//console.log("We have started our server on port " + server.address().port);
+	console.log("We have started our server on port " + port);
 	// SensorTag.discover(function(tag) { and close it with }); above ondiscover mthod
 	function onDiscover(tag){
 
