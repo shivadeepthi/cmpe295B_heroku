@@ -422,7 +422,7 @@ app.post("/suggestedValue",function(req,res){
 	}
 });
 
-var io = require('socket.io').listen(app.listen(80,function(){
+var io = require('socket.io').listen(app.listen(port,function(){
    
 	console.log("We have started our server on port " + port);
 	// SensorTag.discover(function(tag) { and close it with }); above ondiscover mthod
