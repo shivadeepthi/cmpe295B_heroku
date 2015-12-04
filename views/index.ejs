@@ -32,8 +32,8 @@
 
     
     <script>  
-        var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
-           //var socket = io.connect(window.location.hostname);
+    var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['websocket']});
+        //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
             console.log("window.location.hostname"+location.port);
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
@@ -440,8 +440,9 @@
 </script>
 
 <script>
- var socket = io.connect("\/\/"+window.location.hostname+":"+location.port);
- //var socket = io.connect(window.location.hostname);
+var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['websocket']});
+ //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
+
     var objTemp="";
     var ambTemp="";
     var humid="";

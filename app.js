@@ -425,7 +425,7 @@ app.post("/suggestedValue",function(req,res){
 
 var io = require('socket.io').listen(server.listen(port,function(){
    
-	console.log("We have started our server on port " + server.address().port);
+	//console.log("We have started our server on port " + server.address().port);
 	// SensorTag.discover(function(tag) { and close it with }); above ondiscover mthod
 	function onDiscover(tag){
 
@@ -516,8 +516,9 @@ var io = require('socket.io').listen(server.listen(port,function(){
 })
 );
 io.on('connection', function () {
-	  io.set("transports", ["xhr-polling"]);
-	  io.set("polling duration", 10);
+	  io.set('transports', ['websocket']);
+	 // io.set("transports", ["xhr-polling"]);
+	 // io.set("polling duration", 10);
 	});
 
 
