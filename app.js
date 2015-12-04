@@ -516,9 +516,9 @@ var io = require('socket.io').listen(server.listen(port,function(){
 })
 );
 io.on('connection', function () {
-	  io.set('transports', ['websocket']);
-	 // io.set("transports", ["xhr-polling"]);
-	 // io.set("polling duration", 10);
+	  //io.set('transports', ['websocket']);
+	  io.set("transports", ["xhr-polling"]);
+	  io.set("polling duration", 10);
 	});
 
 

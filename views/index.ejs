@@ -32,12 +32,12 @@
 
     
     <script>  
-    var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['websocket']});
+    var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['xhr-polling']});
         //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
-            console.log("window.location.hostname"+location.port);
+
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
-                console.log("This is my places");
+                console.log("This is my places" + data.objTemp );
                 $('#ambTemp').html(parseInt(data.ambTemp));
                 $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/temp?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
                 data: JSON.stringify( { "SensorId" : data.sensorId,
@@ -440,7 +440,7 @@
 </script>
 
 <script>
-var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['websocket']});
+var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['xhr-polling']});
  //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
 
     var objTemp="";
