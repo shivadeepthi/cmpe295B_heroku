@@ -32,9 +32,9 @@
 
     
     <script>  
-    var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['xhr-polling']});
+   // var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['xhr-polling']});
         //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
-
+    var socket = io.connect("peaceful-plateau-6281.herokuapp.com");
             socket.on('objTemp', function(data) {
                 $('#objTemp').html(parseInt(data.objTemp));
                 console.log("This is my places" + data.objTemp );
@@ -440,7 +440,7 @@
 </script>
 
 <script>
-var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['xhr-polling']});
+var socket = io.connect("peaceful-plateau-6281.herokuapp.com");
  //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
 
     var objTemp="";
