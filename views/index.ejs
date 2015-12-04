@@ -21,19 +21,19 @@
         <link id="base-style" href="/css/modalstyle.css" rel="stylesheet">
 
     <link id="base-style-responsive" href="/css/style-responsive.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
     <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>-->
     <!-- end: CSS -->
      <script src="/js/jquery-1.9.1.min.js"></script>
      <script src="/js/jquery-migrate-1.0.0.min.js"></script>
-    <script src='https://peaceful-plateau-6281.herokuapp.com/socket.io/socket.io.js'></script>
-    <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/0.0.9/eon.css" /> 
+    <script src='http://peaceful-plateau-6281.herokuapp.com/socket.io/socket.io.js'></script>
+    <script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/v/eon/0.0.9/eon.css" /> 
 
     
     <script>  
         //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
-var socket = io.connect("//peaceful-plateau-6281.herokuapp.com:443");
+var socket = io.connect("//peaceful-plateau-6281.herokuapp.com:80");
     socket.on('objTemp', function(data) {
     $('#objTemp').html(parseInt(data.objTemp));
     console.log("This is my places" + data.objTemp );
@@ -439,7 +439,7 @@ var socket = io.connect("//peaceful-plateau-6281.herokuapp.com:443");
 </script>
 
 <script>
-var socket = io.connect("//peaceful-plateau-6281.herokuapp.com:443");
+var socket = io.connect("//peaceful-plateau-6281.herokuapp.com:80");
  //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
 
     var objTemp="";
