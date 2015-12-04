@@ -26,20 +26,19 @@
     <!-- end: CSS -->
      <script src="/js/jquery-1.9.1.min.js"></script>
      <script src="/js/jquery-migrate-1.0.0.min.js"></script>
-    <script src='/socket.io/socket.io.js'></script>
+    <script src='https://peaceful-plateau-6281.herokuapp.com/socket.io/socket.io.js'></script>
     <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/0.0.9/eon.js"></script>
     <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/0.0.9/eon.css" /> 
 
     
     <script>  
-   // var socket = io.connect("peaceful-plateau-6281.herokuapp.com", {transports: ['xhr-polling']});
         //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
-    var socket = io.connect("peaceful-plateau-6281.herokuapp.com");
-            socket.on('objTemp', function(data) {
-                $('#objTemp').html(parseInt(data.objTemp));
-                console.log("This is my places" + data.objTemp );
-                $('#ambTemp').html(parseInt(data.ambTemp));
-                $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/temp?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
+var socket = io.connect("//peaceful-plateau-6281.herokuapp.com:443");
+    socket.on('objTemp', function(data) {
+    $('#objTemp').html(parseInt(data.objTemp));
+    console.log("This is my places" + data.objTemp );
+    $('#ambTemp').html(parseInt(data.ambTemp));
+    $.ajax( { url: "https://api.mongolab.com/api/1/databases/cmpe295b_siemt/collections/temp?apiKey=rvu6pAb1B5s-xO1eQBgXKTWMzRQOHQ-0",
                 data: JSON.stringify( { "SensorId" : data.sensorId,
                                         "ObjectTemp":data.objTemp,
                                         "AmbientTemp":data.ambTemp,
@@ -440,7 +439,7 @@
 </script>
 
 <script>
-var socket = io.connect("peaceful-plateau-6281.herokuapp.com");
+var socket = io.connect("//peaceful-plateau-6281.herokuapp.com:443");
  //var socket = io.connect("\/\/"+window.location.hostname+":"+80);
 
     var objTemp="";
